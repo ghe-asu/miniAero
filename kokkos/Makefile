@@ -24,15 +24,14 @@ SRC = $(wildcard *.C)
 OBJ = $(SRC:.C=.o)
 LIB =
 
-CXXFLAGS += -Isrc
-include $(KOKKOS_PATH)/Makefile.kokkos
+CXXFLAGS += -I.
 
 build: $(EXE)
 
 $(EXE): $(OBJ) $(KOKKOS_LINK_DEPENDS)
 	$(LINK) $(KOKKOS_LDFLAGS) $(LINKFLAGS) $(EXTRA_PATH) $(OBJ) $(KOKKOS_LIBS) $(LIB) -o $(EXE)
 
-clean: kokkos-clean 
+clean:
 	rm -f *.o *.cuda *.host
 
 test: $(EXE)
